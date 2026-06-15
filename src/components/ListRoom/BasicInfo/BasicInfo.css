@@ -1,0 +1,221 @@
+*,*::before,*::after{box-sizing:border-box}
+
+/* ── PAGE ── */
+.basic-info-container{
+  width:100%;
+  min-height:100vh;
+  padding:24px 20px 100px;
+  background:#fef1f3;
+}
+
+/* ── TOP BAR ── */
+.listroom-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 18px;
+}
+.back-arrow{
+  background:#fff;
+  border:1.5px solid #fcd0d8;
+  border-radius:10px;
+  width:40px;height:40px;
+  font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#e8474c;
+  transition:background .15s,color .15s;
+}
+.back-arrow:hover{background:#ffe8eb;color:#c0373c}
+.section-btn{
+  background:#fff;
+  border:1.5px solid #fcd0d8;
+  border-radius:10px;
+  height:40px;padding:0 16px;
+  font-size:13px;font-weight:700;
+  color:#e8474c;cursor:pointer;
+  transition:background .15s,color .15s;
+}
+.section-btn:hover{background:#ffe8eb;color:#c0373c}
+
+/* ── SECTIONS DRAWER ── */
+.section-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:300;
+  display:flex;align-items:flex-end;padding:16px;
+}
+.section-drawer{
+  background:#fff;border-radius:20px;
+  padding:22px 20px;width:100%;max-width:460px;margin:0 auto;
+}
+.drawer-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;
+}
+.drawer-header h3{font-size:15px;font-weight:700;color:#111827}
+.close-btn{
+  background:none;border:none;width:30px;height:30px;
+  border-radius:8px;font-size:17px;color:#9ca3af;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.close-btn:hover{background:#fff0f3}
+.section-item{
+  padding:12px 14px;border-radius:12px;
+  font-size:14px;font-weight:600;color:#6b7280;
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:4px;cursor:pointer;
+}
+.section-item:hover{background:#fff5f7}
+.section-item.active{background:#fff0f3;color:#e8474c}
+.active-arrow{font-size:16px}
+
+/* ── PROGRESS ── */
+.section-title{
+  display:block;
+  font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:#f4a0aa;
+  margin:0 0 12px;
+}
+.progress-bar{
+  width:100%;
+  margin:0 0 22px;
+  height:5px;background:#fcd0d8;
+  border-radius:99px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:#ff5a5f;
+  border-radius:99px;transition:width .4s ease;
+}
+
+/* ── QUESTION CARD ── */
+.question-card{
+  width:100%;
+  margin:0 0 14px;
+  background:#ffffff;
+  border:1px solid #fcd0d8;
+  border-radius:18px;
+  padding:26px 22px 22px;
+  animation:fadeSlide .3s ease;
+}
+.question-card h1{
+  font-size:1.2rem;font-weight:700;
+  color:#1f2937;line-height:1.3;
+  margin:0 0 6px;
+}
+.question-card p{
+  font-size:14px;color:#f4879a;
+  line-height:1.6;margin:0 0 18px;
+}
+
+/* ── CHIP GRID ── */
+.room-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.room-card{
+  background:#fff5f7;
+  border:1.5px solid #fcd0d8;
+  border-radius:12px;
+  min-height:52px;
+  padding:10px 12px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  font-size:13px;font-weight:700;color:#374151;
+  line-height:1.35;word-break:break-word;
+  cursor:pointer;
+  transition:border-color .18s,background .18s,color .18s,transform .15s,box-shadow .15s;
+}
+.room-card:hover{border-color:#ff5a5f;background:#ffe8eb;color:#c0373c;transform:translateY(-2px)}
+.room-card.active{
+  background:#ff5a5f;border-color:#ff5a5f;color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(255,90,95,.25);
+}
+.room-card.active:hover{background:#e8474c;border-color:#e8474c}
+
+/* ── INPUT ── */
+.input-field{
+  width:100%;height:50px;
+  border:1.5px solid #fcd0d8;background:#fff8f9;
+  border-radius:12px;padding:0 16px;
+  font-size:15px;color:#1f2937;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.input-field:focus{border-color:#ff5a5f;background:#fff;box-shadow:0 0 0 3px rgba(255,90,95,.1)}
+.input-field::placeholder{color:#fcb3bd}
+
+/* ── BUTTONS ── */
+.button-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  width:100%;
+  padding-top:6px;
+}
+.back-btn{
+  height:56px;
+  background:#fff;
+  border:1.5px solid #fcd0d8;
+  border-radius:14px;
+  font-size:15px;font-weight:700;
+  color:#e8474c;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s,transform .12s;
+}
+.back-btn:hover{background:#ffe8eb}
+.back-btn:disabled{opacity:.35;cursor:default;transform:none!important}
+.next-btn{
+  height:56px;
+  background:#ff5a5f;
+  border:none;
+  border-radius:14px;
+  font-size:15px;font-weight:700;
+  color:#fff;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  letter-spacing:.01em;
+  transition:background .15s,transform .12s;
+}
+.next-btn:hover{background:#e8474c;transform:translateY(-1px)}
+.back-btn:active,.next-btn:active{transform:scale(.97)!important}
+
+/* ── ANIMATION ── */
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── DESKTOP ≥1024px ── */
+@media(min-width:1024px){
+  .basic-info-container{padding:32px 40px 100px}
+  .listroom-header{max-width:780px;margin-left:auto;margin-right:auto;display:flex}
+  .section-title{max-width:780px;margin-left:auto;margin-right:auto;display:block}
+  .progress-bar{max-width:780px;margin-left:auto;margin-right:auto;margin-bottom:22px}
+  .question-card{max-width:780px;margin-left:auto;margin-right:auto}
+  .button-wrapper{max-width:780px;margin-left:auto;margin-right:auto;display:grid}
+  .room-grid{grid-template-columns:repeat(4,1fr)}
+  .question-card h1{font-size:1.35rem}
+}
+
+/* ── TABLET ≤768px ── */
+@media(max-width:768px){
+  .basic-info-container{padding:16px 14px 110px}
+  .question-card{padding:20px 16px 18px}
+  .question-card h1{font-size:1.1rem}
+  .room-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── MOBILE ≤480px ── */
+@media(max-width:480px){
+  .section-title{font-size:10px}
+  .question-card h1{font-size:1rem}
+  .question-card p{font-size:13px}
+  .input-field{height:48px}
+  .room-card{min-height:50px;font-size:12px}
+  .next-btn{height:60px;font-size:18px}
+  .back-btn{width:90px;height:60px;font-size:14px}
+}

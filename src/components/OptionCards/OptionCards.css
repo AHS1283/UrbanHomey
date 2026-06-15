@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+}
+
+body{
+  background:#f8fafc;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.option-section{
+  width:100%;
+  padding:24px 18px;
+
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.option-card{
+  width:100%;
+
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+
+  padding:22px;
+
+  border-radius:26px;
+
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  border:1px solid rgba(99,102,241,0.12);
+
+  box-shadow:
+    0 10px 30px rgba(99,102,241,0.10),
+    0 4px 12px rgba(0,0,0,0.05);
+
+  cursor:pointer;
+
+  transition:all .35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle animated glow */
+.option-card::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(99,102,241,0.08), transparent 60%);
+  transform:scale(0);
+  transition:transform 0.6s ease;
+}
+
+.option-card:hover::before{
+  transform:scale(1);
+}
+
+.option-card:hover{
+  transform:translateY(-8px) scale(1.01);
+
+  box-shadow:
+    0 25px 55px rgba(99,102,241,0.18),
+    0 15px 30px rgba(0,0,0,0.08);
+
+  border:1px solid rgba(99,102,241,0.25);
+}
+
+/* ICON */
+.option-icon{
+  font-size:26px;
+  width:50px;
+  height:50px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:white;
+
+  box-shadow:0 8px 20px rgba(99,102,241,0.25);
+}
+
+/* TEXT */
+.option-content h3{
+  font-size:1.1rem;
+  font-weight:700;
+  color:#111827;
+}
+
+.option-content p{
+  font-size:0.9rem;
+  color:#6b7280;
+  margin-top:6px;
+  line-height:1.5;
+}
+
+/* BADGE */
+.option-top{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  width:100%;
+}
+.option-badge{
+  font-size:0.7rem;
+  font-weight:600;
+
+  padding:5px 10px;
+  border-radius:999px;
+
+  background:rgba(99,102,241,0.1);
+  color:#4f46e5;
+}
+
+
+
+
+
+/* =========================
+   CARD COLORS
+========================= */
+
+.option-card:nth-child(1){
+  background:
+  linear-gradient(
+    135deg,
+    rgba(99,102,241,0.08),
+    rgba(255,255,255,0.85)
+  );
+}
+
+.option-card:nth-child(2){
+  background:
+  linear-gradient(
+    135deg,
+    rgba(6,182,212,0.08),
+    rgba(255,255,255,0.85)
+  );
+}
+
+.option-card:nth-child(3){
+  background:
+  linear-gradient(
+    135deg,
+    rgba(236,72,153,0.08),
+    rgba(255,255,255,0.85)
+  );
+}
+
+.option-card:nth-child(4){
+  background:
+  linear-gradient(
+    135deg,
+    rgba(16,185,129,0.08),
+    rgba(255,255,255,0.85)
+  );
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:768px){
+
+  .option-section{
+    padding:20px 16px;
+    gap:18px;
+  }
+
+  .option-card{
+    padding:18px;
+    border-radius:20px;
+    gap:14px;
+  }
+
+  .option-icon{
+    width:56px;
+    height:56px;
+    min-width:56px;
+
+    font-size:1.3rem;
+  }
+
+  .option-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .option-top h3{
+    font-size:1rem;
+  }
+
+  .option-content p{
+    font-size:0.85rem;
+  }
+
+  .option-badge{
+    font-size:0.7rem;
+    padding:6px 12px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+  .option-section{
+    padding:16px;
+  }
+
+  .option-card{
+    padding:16px;
+    border-radius:18px;
+    gap:12px;
+  }
+
+  .option-icon{
+    width:50px;
+    height:50px;
+    min-width:50px;
+
+    font-size:1.15rem;
+    border-radius:14px;
+  }
+
+  .option-top h3{
+    font-size:0.95rem;
+  }
+
+  .option-content p{
+    font-size:0.8rem;
+    line-height:1.6;
+  }
+
+  .option-badge{
+    font-size:0.65rem;
+    padding:5px 10px;
+  }
+}

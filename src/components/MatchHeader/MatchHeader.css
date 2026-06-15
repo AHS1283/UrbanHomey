@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.match-header-section{
+  width:100%;
+
+  padding:70px 7% 50px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:30px;
+
+  background:#ffffff;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.match-text{
+  max-width:100%;
+}
+
+.match-text h2{
+  font-size:clamp(1.5rem,2vw,2rem);
+  font-weight:500;
+  line-height:1.10;
+  margin-bottom:12px;
+  letter-spacing:-1px;
+
+  background:linear-gradient(
+    125deg,
+    #7c3aed,
+    #a855f7
+  );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.match-text p{
+  font-size:1rem;
+  line-height:1.7;
+
+  color:#64748b;
+
+  max-width:550px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.matches-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:14px 22px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#f8fafc;
+
+  color:#1b519d;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+
+  border:1px solid #e2e8f0;
+
+  white-space:nowrap;
+}
+
+.matches-btn:hover{
+  transform:translateY(-2px);
+
+  background:#6a92ef;
+
+  color:#ffffff;
+
+  border-color:#15347e;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.12);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:992px){
+
+  .match-header-section{
+    padding:60px 5%;
+  }
+
+  .match-text h2{
+    font-size:2.3rem;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+  .match-header-section{
+    flex-direction:column;
+    align-items:flex-start;
+
+    padding:50px 20px 40px;
+  }
+
+  .match-text h2{
+    font-size:2rem;
+  }
+
+  .match-text p{
+    font-size:.95rem;
+  }
+
+  .matches-btn{
+    width:100%;
+    justify-content:center;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:480px){
+
+  .match-text h2{
+    font-size:1.7rem;
+  }
+
+  .match-text p{
+    font-size:.9rem;
+  }
+
+  .matches-btn{
+    padding:12px 18px;
+    font-size:.9rem;
+  }
+}
