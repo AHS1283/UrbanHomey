@@ -1,71 +1,69 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ useLocation add kiya
 import "./Header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // ✅ add kiya
+
+  const scrollToSection = (sectionId) => {
+    if (location.pathname !== "/") {
+      // ✅ Dusre page se aaye ho toh sessionStorage mein save karo
+      console.log("Saving to sessionStorage →", sectionId); // debug
+      sessionStorage.setItem("scrollTo", sectionId);
+      navigate("/");
+    } else {
+      // ✅ Already home page par ho toh seedha scroll karo
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setMenuOpen(false);
+  };
 
   return (
     <header className="header">
-
-      {/* Logo */}
       <div className="logo">
         <img src="/mainlogo.jpeg" alt="UrbanHomey" className="logo-img" />
       </div>
 
-      {/* Hamburger */}
-      <div
-        className="hamburger"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        ☰
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        &#9776;
       </div>
 
-      {/* Navigation */}
       <nav className={menuOpen ? "nav-links active" : "nav-links"}>
+        <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
 
-        <a href="/" className="active" onClick={() => setMenuOpen(false)}>
-          Home
-        </a>
-
-        <a href="/" onClick={() => setMenuOpen(false)}>
+        <a href="#how-it-works" onClick={(e) => { e.preventDefault(); scrollToSection("how-it-works"); }}>
           How It Works
         </a>
 
-        <a href="/" onClick={() => setMenuOpen(false)}>
-          Features
-        </a>
-
-        <a href="/" onClick={() => setMenuOpen(false)}>
+        <a href="#matches" onClick={(e) => { e.preventDefault(); scrollToSection("matches"); }}>
           Matches
         </a>
 
-        {/* Mobile Buttons */}
+        <a href="#reviews" onClick={(e) => { e.preventDefault(); scrollToSection("reviews"); }}>
+          Reviews
+        </a>
+
+        <a href="#blogs" onClick={(e) => { e.preventDefault(); scrollToSection("blogs"); }}>
+          Blogs
+        </a>
+
         <div className="mobile-menu-buttons">
-          <button
-            className="mobile-start-btn"
-            onClick={() => {
-              navigate("/login");
-              setMenuOpen(false);
-            }}
-          >
+          <button className="mobile-start-btn" onClick={() => { navigate("/login"); setMenuOpen(false); }}>
             Get Started
           </button>
         </div>
-
       </nav>
 
-      {/* Desktop Buttons */}
       <div className="header-buttons">
-        <button
-          className="start-btn"
-          onClick={() => navigate("/login")}
-        >
+        <button className="start-btn" onClick={() => navigate("/login")}>
           Get Started
         </button>
       </div>
-
     </header>
   );
 };

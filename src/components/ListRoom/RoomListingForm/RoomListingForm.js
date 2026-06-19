@@ -54,7 +54,7 @@ function QuestionCard({ q, form, set }) {
   return (
     <div className="question-card">
       <h1>{q.title}</h1>
-      {q.type==="date"     && <input type="date"   className="input-field" value={form[q.key]||""} onChange={(e)=>set(q.key,e.target.value)} />}
+      {q.type==="date" && <input type="date" className="input-field" min={new Date().toISOString().split("T")[0]} value={form[q.key]||""} onChange={(e)=>set(q.key,e.target.value)} />}
       {q.type==="number"   && <input type="number" className="input-field" placeholder="Enter amount in ₹" value={form[q.key]||""} onChange={(e)=>set(q.key,e.target.value)} />}
       {q.type==="text"     && <input type="text"   className="input-field" value={form[q.key]||""} onChange={(e)=>set(q.key,e.target.value)} />}
       {q.type==="textarea" && <textarea className="input-field textarea-field" rows="5" placeholder="Describe your flat..." value={form[q.key]||""} onChange={(e)=>set(q.key,e.target.value)} />}

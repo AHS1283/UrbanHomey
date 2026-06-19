@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --brand-gradient: linear-gradient(90deg, #7B3FF2 0%, #A13FEA 50%, #F24BA5 100%);
+}
 
 * {
   margin: 0;
@@ -8,9 +13,91 @@
 }
 
 body {
-  background: #f5f4f9;
+  
+  
   overflow-x: hidden;
 }
+
+/* =========================
+   SECTION WRAPPER
+========================= */
+
+.match-section {
+  width: 100%;
+  
+  background: linear-gradient(180deg, #f8f6ff 0%, #f0e8ff 100%);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.match-header-section {
+  width: 100%;
+  padding: 70px 7% 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;background: linear-gradient(180deg, #f8f6ff 0%, #f0e8ff 100%);
+  font-family: "Poppins", sans-serif;
+}
+
+.match-text {
+  margin-top: 30px;
+  max-width: 100%;
+}
+
+.match-text h2 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 500;
+  line-height: 1.10;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Poppins", sans-serif;
+}
+
+.match-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #64748b;
+  max-width: 550px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* =========================
+   HEADER BUTTON
+========================= */
+
+.matches-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 14px;
+  background: var(--brand-gradient);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: 0.3s ease;
+  white-space: nowrap;
+}
+
+.matches-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+  box-shadow: 0 10px 25px rgba(123, 63, 242, 0.35);
+}
+
+/* =========================
+   CARDS WRAPPER
+========================= */
 
 .match-wrapper {
   padding: 24px 0 40px;
@@ -30,13 +117,13 @@ body {
 .swiper-pagination-bullet {
   width: 7px;
   height: 7px;
-  background: #c4bfe0;
+  background: #d4b8f7;
   opacity: 1;
   transition: width 0.3s ease, background 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-  background: #534ab7;
+  background: #7B3FF2;
   width: 20px;
   border-radius: 999px;
 }
@@ -58,7 +145,7 @@ body {
 
 .main-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(83, 74, 183, 0.3);
+  border-color: rgba(123, 63, 242, 0.3);
 }
 
 .main-card:active {
@@ -103,7 +190,7 @@ body {
 }
 
 /* =========================
-   MATCH BADGE — top right
+   MATCH BADGE
 ========================= */
 
 .top-badges {
@@ -115,7 +202,8 @@ body {
 
 .match-badge {
   background: rgba(255, 255, 255, 0.95);
-  color: #534ab7;
+  background: var(--brand-gradient);
+  color: #ffffff;
   padding: 5px 13px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -124,8 +212,7 @@ body {
 }
 
 /* =========================
-   CARD CONTENT — bottom overlay
-   Order: Name → Location → Tags → Button → Verified
+   CARD CONTENT
 ========================= */
 
 .card-content {
@@ -140,43 +227,39 @@ body {
   gap: 10px;
 }
 
-/* NAME */
 .card-content h1 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #0fbff0;
+  color: #f6f7f7;
   line-height: 1.2;
 }
-.location{
-  display:flex;
-  align-items:center;
-  gap:8px;
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.location-text{
-  font-size:1rem;      /* increase text size */
-  font-weight:600;
-
-  background:linear-gradient(
-    90deg,
-    #ffffff,
-    #e1e6ec,
-    #e6d5de
-  );
-
-  background-clip:text;
-  -webkit-background-clip:text;
-
-  color:transparent;
-  -webkit-text-fill-color:transparent;
+.location-text {
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffffff, #e1e6ec, #e6d5de);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-.location-icon{
-  color:#e6137c;
-  font-size:18px;
-  flex-shrink:0;
+.location-icon {
+  color: #F24BA5;
+  font-size: 18px;
+  flex-shrink: 0;
 }
-/* TAGS */
+
+/* =========================
+   TAGS
+========================= */
+
 .interest-tags {
   display: flex;
   gap: 6px;
@@ -188,10 +271,11 @@ body {
 .interest-tags::-webkit-scrollbar {
   display: none;
 }
+
 .interest-tags span {
-  background: #ffffff;
-  color: #e6effb;
-  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 5px 13px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -201,16 +285,21 @@ body {
 }
 
 .interest-tags span:hover {
-  background: #1a6fd4;
+  background: var(--brand-gradient);
+  border-color: transparent;
   color: #ffffff;
 }
-/* BUTTON */
+
+/* =========================
+   VIEW PROFILE BUTTON
+========================= */
+
 .view-btn {
   width: 100%;
   padding: 11px;
   border-radius: 12px;
   border: none;
-  background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)! important;
+  background: var(--brand-gradient);
   color: #ffffff;
   font-size: 0.88rem;
   font-weight: 600;
@@ -228,13 +317,17 @@ body {
 .view-btn:active {
   transform: scale(0.98);
 }
-/* VERIFIED — last item, bottom of card-content */
+
+/* =========================
+   VERIFIED BADGE
+========================= */
+
 .verified-badge {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(183, 180, 180, 0.95);
-  color: #1f4239;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -253,10 +346,43 @@ body {
 }
 
 /* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+  .match-header-section {
+    padding: 60px 5%;
+  }
+
+  .match-text h2 {
+    font-size: 2.3rem;
+  }
+}
+
+/* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
+  .match-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 50px 20px 40px;
+  }
+
+  .match-text h2 {
+    font-size: 2rem;
+  }
+
+  .match-text p {
+    font-size: 0.95rem;
+  }
+
+  .matches-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .match-wrapper {
     overflow-x: hidden;
     width: 100%;
@@ -294,5 +420,24 @@ body {
 
   .swiper-pagination {
     bottom: 6px !important;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .match-text h2 {
+    font-size: 1.7rem;
+  }
+
+  .match-text p {
+    font-size: 0.9rem;
+  }
+
+  .matches-btn {
+    padding: 12px 18px;
+    font-size: 0.9rem;
   }
 }

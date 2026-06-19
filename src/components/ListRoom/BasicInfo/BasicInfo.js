@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
+
 import "./BasicInfo.css";
 
 const ROOM_TYPES = ["Studio Apartment","1BHK","2BHK","3BHK","4BHK+","Any"];
@@ -16,8 +17,8 @@ const LIFESTYLE  = ["Non-Smoker","Smoker Friendly","Non-Drinker","Social Drinkin
 
 const ALL_QUESTIONS = [
   { key:"moveInDate",     title:"When are you looking to move in?",       sub:"Approximate date works fine.",     type:"date"   },
-  { key:"minBudget",      title:"What is your minimum budget per month?",  sub:"Enter amount in ₹.",              type:"number", ph:"e.g. 8000"  },
-  { key:"maxBudget",      title:"What is your maximum budget per month?",  sub:"Enter amount in ₹.",              type:"number", ph:"e.g. 15000" },
+  { key:"minBudget",      title:"What is your minimum budget per month?",  sub:"Drag the slider to set amount.", type:"number", min:1000,  max:50000,  step:500  },
+  { key:"maxBudget",      title:"What is your maximum budget per month?",  sub:"Drag the slider to set amount.", type:"number", min:1000,  max:100000, step:500  },
   { key:"roomType",       title:"What type of flat are you looking for?",  sub:"Choose one option.",              type:"single", opts:ROOM_TYPES  },
   { key:"occupancy",      title:"What occupancy are you looking for?",     sub:"Choose one option.",              type:"single", opts:OCCUPANCY   },
   { key:"furnished",      title:"Preferred furnished status?",             sub:"Choose one option.",              type:"single", opts:FURNISHED   },
@@ -34,7 +35,7 @@ const DESKTOP_GROUPS = [
   [0, 1], [2, 3], [4, 5], [6], [7, 8], [9, 10], [11, 12],
 ];
 
-/* ── SingleChips: one selection at a time ── */
+/* ── SingleChips ── */
 function SingleChips({ options, value, onSelect }) {
   return (
     <div className="room-grid">
@@ -52,7 +53,7 @@ function SingleChips({ options, value, onSelect }) {
   );
 }
 
-/* ── MultiChips: toggle individual items in array ── */
+/* ── MultiChips ── */
 function MultiChips({ options, values = [], onToggle }) {
   return (
     <div className="room-grid">
@@ -70,6 +71,61 @@ function MultiChips({ options, values = [], onToggle }) {
   );
 }
 
+/* ── RangeSlider ── */
+function RangeSlider({ q, value, onChange }) {
+  const min     = q.min  || 1000;
+  const max     = q.max  || 100000;
+  const step    = q.step || 500;
+  const current = Number(value) || min;
+  const pct     = ((current - min) / (max - min)) * 100;
+
+  return (
+    <div className="range-wrapper">
+      <div className="range-value-display">
+        ₹{current.toLocaleString("en-IN")}
+      </div>
+
+      <div className="range-track-wrapper">
+        <input
+          type="range"
+          className="range-slider"
+          min={min}
+          max={max}
+          step={step}
+          value={current}
+          onChange={(e) => onChange(e.target.value)}
+          style={{ "--pct": `${pct}%` }}
+        />
+      </div>
+
+      <div className="range-labels">
+        <span>₹{min.toLocaleString("en-IN")}</span>
+        <span>₹{max.toLocaleString("en-IN")}</span>
+      </div>
+
+      <div className="range-quick-btns">
+        {[
+          { label: "₹5K",   val: 5000   },
+          { label: "₹10K",  val: 10000  },
+          { label: "₹20K",  val: 20000  },
+          { label: "₹50K",  val: 50000  },
+        ]
+          .filter((b) => b.val >= min && b.val <= max)
+          .map((b) => (
+            <button
+              type="button"
+              key={b.val}
+              className={`quick-btn ${current === b.val ? "active" : ""}`}
+              onClick={() => onChange(b.val)}
+            >
+              {b.label}
+            </button>
+          ))}
+      </div>
+    </div>
+  );
+}
+
 /* ── QuestionCard ── */
 function QuestionCard({ q, form, set, tog }) {
   return (
@@ -82,17 +138,16 @@ function QuestionCard({ q, form, set, tog }) {
           type="date"
           className="input-field"
           value={form[q.key] || ""}
+          min={new Date().toISOString().split("T")[0]}
           onChange={(e) => set(q.key, e.target.value)}
         />
       )}
 
       {q.type === "number" && (
-        <input
-          type="number"
-          className="input-field"
-          placeholder={q.ph || ""}
-          value={form[q.key] || ""}
-          onChange={(e) => set(q.key, e.target.value)}
+        <RangeSlider
+          q={q}
+          value={form[q.key]}
+          onChange={(val) => set(q.key, val)}
         />
       )}
 
@@ -115,7 +170,7 @@ function QuestionCard({ q, form, set, tog }) {
   );
 }
 
-/* ── main component ── */
+/* ── Main component ── */
 export default function BasicInfo({ onComplete }) {
   const [step, setStep]                 = useState(1);
   const [showSections, setShowSections] = useState(false);
@@ -123,7 +178,7 @@ export default function BasicInfo({ onComplete }) {
   const [saving, setSaving]             = useState(false);
   const [error, setError]               = useState("");
   const [form, setForm]                 = useState({
-    moveInDate:"", minBudget:"", maxBudget:"",
+    moveInDate:"", minBudget:1000, maxBudget:1000,
     roomType:"", occupancy:"", furnished:"",
     amenities:[], flatmateGender:"", ageGroup:"",
     occupationType:"", habits:[], qualities:[], lifestyle:[],
@@ -145,10 +200,8 @@ export default function BasicInfo({ onComplete }) {
     ? DESKTOP_GROUPS[step - 1].map((i) => ALL_QUESTIONS[i])
     : [ALL_QUESTIONS[step - 1]];
 
-  /* set: replace entire value for a key (single, date, number) */
   const set = (key, val) => setForm((f) => ({ ...f, [key]: val }));
 
-  /* tog: toggle one item inside an array value (multi) */
   const tog = (key, item) =>
     setForm((f) => ({
       ...f,
@@ -157,7 +210,6 @@ export default function BasicInfo({ onComplete }) {
         : [...f[key], item],
     }));
 
-  /* ── save to users/{uid}/basicInfo subcollection ── */
   const saveToFirebase = async () => {
     setSaving(true);
     setError("");
@@ -166,13 +218,13 @@ export default function BasicInfo({ onComplete }) {
       if (!user) throw new Error("User not logged in. Please log in and try again.");
 
       await addDoc(
-        collection(db, "users", user.uid, "userData"),  // subcollection under user
+        collection(db, "users", user.uid, "userData"),
         {
           ...form,
           minBudget: form.minBudget ? Number(form.minBudget) : null,
           maxBudget: form.maxBudget ? Number(form.maxBudget) : null,
-          uid:       user.uid,          // redundant but handy for queries
-          email:     user.email,        // store user email for reference
+          uid:       user.uid,
+          email:     user.email,
           createdAt: serverTimestamp(),
         }
       );
@@ -237,8 +289,10 @@ export default function BasicInfo({ onComplete }) {
         <button className="next-btn" onClick={goNext} disabled={saving}>
           {saving ? "Saving..." : step === TOTAL ? "Finish ✓" : "Next →"}
         </button>
+        
       </div>
-
+      
     </div>
+    
   );
 }

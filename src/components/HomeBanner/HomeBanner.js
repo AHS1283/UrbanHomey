@@ -17,7 +17,7 @@ function HomeBanner() {
         </h1>
 
         <p>
-          UrbanHomey helps students and professionals in Pune
+          UrbanHomey helps students and professionals across India
           discover compatible flatmates based on lifestyle,
           budget, location, and daily habits. Find a home
           where you truly belong.

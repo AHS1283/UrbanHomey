@@ -57,7 +57,6 @@ const avgRating = 4.8;
 function Reviews() {
   const [reviews, setReviews] = useState(initialReviews);
   const [showForm, setShowForm] = useState(false);
-  const [showAll, setShowAll] = useState(false);
   const [form, setForm] = useState({ name: "", location: "", rating: 0, review: "" });
   const [hovered, setHovered] = useState(0);
 
@@ -77,7 +76,7 @@ function Reviews() {
   };
 
   return (
-    <section className="reviews-section">
+    <section className="reviews-section" id="reviews">
 
       {/* ── HEADER ── */}
       <div className="reviews-header">
@@ -127,13 +126,6 @@ function Reviews() {
         </div>
       </div>
 
-      {/* ── ACTION BUTTONS ── */}
-      <div className="reviews-actions">
-        <button className="btn-view-all" onClick={() => setShowAll(!showAll)}>
-          {showAll ? "Show Less" : "View All Reviews"}
-        </button>
-      </div>
-
       {/* ── WRITE A REVIEW FORM ── */}
       {showForm && (
         <div className="review-form">
@@ -178,32 +170,24 @@ function Reviews() {
       )}
 
       {/* ── SWIPER ── */}
-      {!showAll ? (
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={20}
-          loop={true}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          breakpoints={{
-            320: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1200: { slidesPerView: 3 },
-          }}
-        >
-          {reviews.map((r) => (
-            <SwiperSlide key={r.id}>
-              <ReviewCard r={r} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <div className="all-reviews-grid">
-          {reviews.map((r) => (
-            <ReviewCard key={r.id} r={r} />
-          ))}
-        </div>
-      )}
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        spaceBetween={20}
+        loop={true}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1200: { slidesPerView: 3 },
+        }}
+      >
+        {reviews.map((r) => (
+          <SwiperSlide key={r.id}>
+            <ReviewCard r={r} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
     </section>
   );

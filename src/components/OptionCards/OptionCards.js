@@ -16,14 +16,11 @@ function OptionCards() {
         <div className="option-icon">🏠</div>
 
         <div className="option-content">
-          <div className="option-top">
-            <h3>I have a space</h3>
-            <span className="option-badge">POPULAR</span>
-          </div>
-
+          <h3>I have a space</h3>
           <p>
             List your room and find compatible roommates who fit your lifestyle.
           </p>
+          <span className="option-badge">POPULAR</span>
         </div>
       </div>
 
@@ -35,14 +32,11 @@ function OptionCards() {
         <div className="option-icon">🔍</div>
 
         <div className="option-content">
-          <div className="option-top">
-            <h3>I need a room</h3>
-            <span className="option-badge">MOST USED</span>
-          </div>
-
+          <h3>I need a room</h3>
           <p>
             Browse curated listings and match with homeowners based on shared values.
           </p>
+          <span className="option-badge">MOST USED</span>
         </div>
       </div>
 

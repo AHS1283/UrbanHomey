@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { auth, db } from "../../firebase";
+
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -19,7 +20,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState(false);
-  
+
 
   const validatePassword = (password) => {
     const errors = [];
@@ -59,8 +60,7 @@ const Signup = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };
-  const handleSubmit = async (e) => {
+  }; const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -76,11 +76,14 @@ const Signup = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
+      setIsSigningUp(true);
+
+      const userCredential =
+        await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
 
       const user = userCredential.user;
 
@@ -90,70 +93,75 @@ const Signup = () => {
         uid: user.uid,
         createdAt: new Date(),
       });
-      
+
       alert("Account Created Successfully!");
+
       navigate("/login");
 
     } catch (error) {
       alert(error.message);
+    } finally {
+      setTimeout(() => {
+        setIsSigningUp(false);
+      }, 100); // 1 second disable
     }
   };
+  const handleGoogleSignup = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
 
-const handleGoogleSignup = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
 
-    const result = await signInWithPopup(auth, provider);
+      const user = result.user;
 
-    const user = result.user;
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          fullName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+        },
+        { merge: true }
+      );
 
-    await setDoc(
-      doc(db, "users", user.uid),
-      {
-        fullName: user.displayName,
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL,
-        createdAt: new Date(),
-      },
-      { merge: true }
-    );
+      navigate("/Dashboard");
 
-    navigate("/Dashboard");
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
-  } catch (error) {
-    console.log(error);
-    alert(error.message);
-  }
-};
+  const handleFacebookSignup = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
 
-const handleFacebookSignup = async () => {
-  try {
-    const provider = new FacebookAuthProvider();
+      const result = await signInWithPopup(auth, provider);
 
-    const result = await signInWithPopup(auth, provider);
+      const user = result.user;
 
-    const user = result.user;
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          fullName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+        },
+        { merge: true }
+      );
 
-    await setDoc(
-      doc(db, "users", user.uid),
-      {
-        fullName: user.displayName,
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL,
-        createdAt: new Date(),
-      },
-      { merge: true }
-    );
+      navigate("/Dashboard");
 
-    navigate("/Dashboard");
-
-  } catch (error) {
-    console.log(error);
-    alert(error.message);
-  }
-};
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
   return (
     <div className="signup-container">
       <div className="signup-card">
@@ -320,14 +328,20 @@ const handleFacebookSignup = async () => {
                 )}
 
               </div>
-
               <button
                 type="submit"
                 className="create-btn"
+                disabled={isSigningUp}
               >
-                Create Account
+                {isSigningUp ? (
+                  <>
+                    <span className="btn-spinner"></span>
+                    Signing Up...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
               </button>
-
 
               {/* SOCIAL LOGIN */}
               <div className="divider">
