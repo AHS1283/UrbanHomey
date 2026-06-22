@@ -39,43 +39,6 @@
     0 40px 100px rgba(0,0,0,.08);
 }
 
-.social-login{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-bottom:25px;
-}
-
-.social-btn{
-  width:100%;
-  height:50px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-
-  border:1.5px solid #e0caf2;
-  border-radius:12px;
-
-  background:#fff;
-
-  font-weight:600;
-  cursor:pointer;
-
-  transition:.3s;
-}
-
-.social-btn:hover{
-  transform:translateY(-2px);
-  background:#f2eaf8;
-}
-
-.social-btn img{
-  width:20px;
-  height:20px;
-}
-
 .password-field{
   position:relative;
 }
@@ -345,76 +308,59 @@
   color:#6b7280;
 }
 
+/* =========================
+   SOCIAL LOGIN BUTTONS
+========================= */
+
 .social-login{
   display:flex;
   flex-direction:row;
   justify-content:center;
-  align-items:center;
-  gap:12px;
+  gap:16px;
   margin-top:20px;
-  flex-wrap:nowrap;
-}
-
-.social-btn{
-  width:150px;
-  height:50px;
+  margin-bottom:25px;
+}.social-btn{
+  width:56px;
+  height:56px;
 
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
 
+  overflow:hidden;
+
+  border-radius:50%;
   border:1.5px solid #e0caf2;
-  border-radius:12px;
-
   background:#fff;
-
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
 }
 
-/* Mobile */
-@media (max-width:1024px){
-
-  .social-login{
-    flex-direction:row;
-    justify-content:center;
-  }
-
-  .social-btn{
-    width:45px;
-    font-size:0;
-    height:45px;
-    padding:0;
-  }
-}
-
-.google{
-  background:#ffffff;
-  color:#374151;
-  border:1.5px solid #e0caf2;
-}
-
-.google:hover{
-  background:#8138EC;
-  color:#fff;
-}
-
-.facebook:hover{
-  background:#8138EC;
-  color:#fff;
-}
-
-.linkedin:hover{
-  background:#8138EC;
-  color:#fff;
+.social-btn img{
+  width:24px;
+  height:24px;
+  display:block;
 }
 
 .social-btn:hover{
   transform:translateY(-3px);
-  box-shadow:0 10px 25px rgba(129,56,236,.15);
+  background:#8138EC;
   border-color:#8138EC;
+  box-shadow:0 10px 25px rgba(129,56,236,.25);
+}
+
+/* FIXED: turn coloured icons white on hover so they're visible on purple */
+.social-btn:hover img{
+  filter:brightness(0) invert(1);
+}
+
+@media (max-width:576px){
+  .social-login{
+    gap:14px;
+  }
+
+  .social-btn{
+    width:46px;
+    height:46px;
+  }
 }
 
 .divider{

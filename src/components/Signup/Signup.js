@@ -347,8 +347,6 @@ const Signup = () => {
               <div className="divider">
                 <span>OR</span>
               </div>
-
-
               <div className="social-login">
                 <button
                   type="button"
@@ -359,7 +357,6 @@ const Signup = () => {
                     src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
                     alt="Google"
                   />
-                  Google
                 </button>
 
                 <button
@@ -371,7 +368,6 @@ const Signup = () => {
                     src="https://cdn-icons-png.flaticon.com/512/124/124010.png"
                     alt="Facebook"
                   />
-                  Facebook
                 </button>
 
                 <button
@@ -382,7 +378,6 @@ const Signup = () => {
                     src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
                     alt="LinkedIn"
                   />
-                  LinkedIn
                 </button>
               </div>
 

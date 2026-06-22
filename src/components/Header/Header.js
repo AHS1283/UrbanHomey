@@ -1,67 +1,131 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // ✅ useLocation add kiya
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const navigate = useNavigate();
-  const location = useLocation(); // ✅ add kiya
+  const location = useLocation();
 
   const scrollToSection = (sectionId) => {
     if (location.pathname !== "/") {
-      // ✅ Dusre page se aaye ho toh sessionStorage mein save karo
-      console.log("Saving to sessionStorage →", sectionId); // debug
       sessionStorage.setItem("scrollTo", sectionId);
       navigate("/");
     } else {
-      // ✅ Already home page par ho toh seedha scroll karo
       const section = document.getElementById(sectionId);
+
       if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
+        section.scrollIntoView({
+          behavior: "smooth",
+        });
       }
     }
+
+    setMenuOpen(false);
+  };
+
+  const goToDownloadPage = () => {
+    navigate("/download-app");
     setMenuOpen(false);
   };
 
   return (
     <header className="header">
-      <div className="logo">
-        <img src="/mainlogo.jpeg" alt="UrbanHomey" className="logo-img" />
+      {/* Logo */}
+      <div
+        className="logo"
+        onClick={() => {
+          navigate("/");
+          setMenuOpen(false);
+        }}
+      >
+        <img
+          src="/mainlogo.png"
+          alt="UrbanHomey"
+          className="logo-img"
+        />
       </div>
 
-      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+      {/* Mobile Menu Icon */}
+      <div
+        className="hamburger"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         &#9776;
       </div>
 
+      {/* Navigation */}
       <nav className={menuOpen ? "nav-links active" : "nav-links"}>
-        <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+            setMenuOpen(false);
+          }}
+        >
+          Home
+        </a>
 
-        <a href="#how-it-works" onClick={(e) => { e.preventDefault(); scrollToSection("how-it-works"); }}>
+        <a
+          href="#how-it-works"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("how-it-works");
+          }}
+        >
           How It Works
         </a>
 
-        <a href="#matches" onClick={(e) => { e.preventDefault(); scrollToSection("matches"); }}>
+        <a
+          href="#matches"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("matches");
+          }}
+        >
           Matches
         </a>
 
-        <a href="#reviews" onClick={(e) => { e.preventDefault(); scrollToSection("reviews"); }}>
+        <a
+          href="#reviews"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("reviews");
+          }}
+        >
           Reviews
         </a>
 
-        <a href="#blogs" onClick={(e) => { e.preventDefault(); scrollToSection("blogs"); }}>
+        <a
+          href="#blogs"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("blogs");
+          }}
+        >
           Blogs
         </a>
 
+        {/* Mobile Download Button */}
         <div className="mobile-menu-buttons">
-          <button className="mobile-start-btn" onClick={() => { navigate("/login"); setMenuOpen(false); }}>
-            Get Started
+          <button
+            className="mobile-start-btn"
+            onClick={goToDownloadPage}
+          >
+            Download App
           </button>
         </div>
       </nav>
 
+      {/* Desktop Download Button */}
       <div className="header-buttons">
-        <button className="start-btn" onClick={() => navigate("/login")}>
-          Get Started
+        <button
+          className="start-btn"
+          onClick={goToDownloadPage}
+        >
+          Download App
         </button>
       </div>
     </header>

@@ -53,6 +53,8 @@ import Terms from "./pages/Terms/Terms";
 
 // Social Sidebar
 import SocialSidebar from "./components/SocialSidebar/SocialSidebar";
+//import DownloadApp from "./components/DownloadApp/DownloadApp";
+import Downloadpage from "./components/Downloadpage/Downloadpage";
 
 
 function ScrollToTop() {
@@ -100,7 +102,7 @@ function ScrollToSection() {
 function PageLayout({ children }) {
   return (
     <>
-      <Header/>
+      <Header />
       {children}
       <Footer />
     </>
@@ -154,6 +156,11 @@ function MatchesPage() {
 /* =========================
    APP
 ========================= */
+
+
+
+
+
 
 function App() {
   return (
@@ -298,8 +305,10 @@ function App() {
               </PageLayout>
             }
           />
+         <Route path="/download-app" element={<PageLayout><Downloadpage /></PageLayout>} />
 
         </Routes>
+
 
       </BrowserRouter>
     </HelmetProvider>
